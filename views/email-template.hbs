@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Ticket Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .email-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #0073e6;
+      color: #fff;
+      border-radius: 8px 8px 0 0;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .content p {
+      margin: 8px 0;
+    }
+    .details {
+      margin: 20px 0;
+      padding: 10px;
+      background: #f9f9f9;
+      border-left: 4px solid #0073e6;
+    }
+    .details p {
+      margin: 5px 0;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px 0;
+      font-size: 12px;
+      color: #777;
+    }
+    .social-icons {
+      margin-top: 10px;
+    }
+    .social-icons a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #0073e6;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>Your Flight Ticket Confirmation</h1>
+    </div>
+    <div class="content">
+      <h2>Dear {{name}},</h2>
+      <p>We are pleased to confirm your flight booking. Please find your e-ticket attached to this email. Kindly review the details carefully to ensure all information is correct.</p>
+      <div class="details">
+        <p><strong>Booking Details:</strong></p>
+        <p>Passenger Name: {{name}}</p>
+        <p>Booking ID: {{bookingReference}}</p>
+        <p>Flight Number: {{flightNumber}}</p>
+        <p>Date of Travel: {{travelDate}}</p>
+        <p>Departure Time: {{departureTime}}</p>
+        <p>Arrival Time: {{arrivalTime}}</p>
+        <p>PNR/Booking Reference: {{pnr}}</p>
+      </div>
+      <p>Please ensure to carry a valid ID along with this ticket during your travel. If you have any questions or need further assistance, feel free to contact us.</p>
+      <p>Thank you for choosing {{companyName}}!</p>
+    </div>
+    <div class="footer">
+      <p>Best regards,</p>
+      <h2><strong>{{companyName}}</strong></h2>
+      <p>📞 {{phoneNumber}} | 📧 {{emailAddress}}</p>
+      <p>🌐 {{websiteUrl}}</p>
+      <p>🏢 {{companyAddress}}</p>
+      <div class="social-icons">
+        Follow us on:
+        <a href="{{facebookUrl}}">Facebook</a>
+        <a href="{{instagramUrl}}">Instagram</a>
+        <a href="{{twitterUrl}}">Twitter</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
