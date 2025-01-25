@@ -1,829 +1,769 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Booking Acknowledgement</title>
-    <style>
+
+   <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            /* Limit width on larger screens */
-            margin: 20px auto;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background-color: #f0f5ff;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header img {
-            height: 40px;
-        }
-
-        .header .help {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-            /* Space between help text and buttons */
-        }
-
-        .header .actions {
-            display: flex;
-            gap: 10px;
-            /* Space between buttons */
-        }
-
-        .header .actions button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .content h2 {
-            font-size: 18px;
-            color: #e56232;
-            margin-bottom: 10px;
-        }
-
-        .details {
-            display: flex;
-            flex-wrap: wrap;
-            /* Allow wrapping */
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .details .info {
-            font-size: 14px;
-            color: #555;
-            flex: 1;
-            /* Allow flex-grow */
-            min-width: 240px;
-            /* Prevent it from getting too narrow */
-        }
-
-        .details .qr-code {
-            text-align: center;
-        }
-
-        .details .qr-code img {
-            height: 80px;
-        }
-
-        .note {
-            background: #f1f9ff;
-            border-left: 4px solid #007bff;
-            padding: 10px 15px;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .terms {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 20px;
-        }
-
-        .steps {
-            display: flex;
-            flex-direction: row;
-            /* flex-wrap: wrap; Allow wrapping */
-            justify-content: space-between;
-            background: #f9f9f9;
-            padding: 15px;
-            border-top: 1px solid #ddd;
-        }
-
-        .step {
-            text-align: center;
-            flex: 1 1 23%;
-            /* Flex-grow, flex-shrink, and basis */
-            margin: 5px;
-            /* Space between steps */
-            font-size: 14px;
-            padding: 1rem;
-            border-radius: 1rem;
-        }
-
-        .step1 {
-            background: linear-gradient(to left, #ffffff, #dcecfb);
-        }
-
-        .step2 {
-            background: linear-gradient(to right, #c5bfae, #ffffff);
-        }
-
-        .step3 {
-            background: linear-gradient(to right, #c5bfae, #ffffff);
-        }
-
-        .step4 {
-            background: linear-gradient(to right, #c5bfae, #ffffff);
-        }
-
-        .step img {
-            height: 40px;
-            margin-bottom: 10px;
-        }
-
-        .step h4 {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .step p {
-            font-size: 12px;
-            color: #777;
-        }
-
-        /* Flight Details Section */
-        .flight-details {
-            font-family: Arial, sans-serif;
-            margin-top: 30px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .flight-details h2 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .flight-section h3 {
-            color: #ff6600;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .flight-info {
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-
-        .flight-header {
-            display: flex;
-            flex-direction: column;
-            /* Stack airline info vertically */
-            margin-bottom: 20px;
-        }
-
-        .airline-info {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            /* Wrap items on smaller screens */
-        }
-
-        .airline-info img {
-            margin-right: 10px;
-            height: 60px;
-        }
-
-        .airline-info h4 {
-            margin: 0;
-            color: #333;
-        }
-
-        .airline-info p {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .travel-class {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .travel-class p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .flight-details-body {
-            background-color: #eaf0f0;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .flight-entry {
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .flight-path {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .flight-time {
-            text-align: left;
-        }
-
-        .flight-time .date,
-        .flight-time .time {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .flight-time .time {
-            font-size: 22px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #333;
-            border-radius: 50%;
-        }
-
-        .duration {
-            font-size: 14px;
-            color: #555;
-            margin: 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .duration img {
-            height: 40px;
-        }
-
-        .baggage-note {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .baggage-note p {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .baggage-info span {
-            font-size: 14px;
-            margin-right: 10px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .layover {
-            background-color: #eaf0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            /* Add padding for spacing */
-            margin-bottom: 20px;
-            /* Space below layover */
-        }
-
-        .layover img {
-            height: 30px;
-            margin-right: 10px;
-            /* Space between image and text */
-        }
-
-        .layover p {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .travel-details {
-            padding: 20px;
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h3 {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            /* Increase the section heading size */
-        }
-
-        .traveler-info,
-        .billing-details,
-        .please-note {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .traveler-info th,
-        .traveler-info td,
-        .billing-details th,
-        .billing-details td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .traveler-info td {
-            text-align: center;
-        }
-
-        .traveler-info th {
-            background-color: #f9f9f9;
-        }
-
-        .status-pending {
-            color: red;
-        }
-
-        .status-confirm {
-            color: green;
-        }
-
-        .total {
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        .note {
-            font-size: 0.9em;
-            color: #555;
-        }
-
-        .note a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .note a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 1024px) {
-            .details {
-                flex-direction: row;
-                /* Stack details on larger tablets */
-                align-items: flex-start;
-            }
-
-            .details .qr-code {
-                margin-top: 10px;
-                /* Add margin for spacing when stacked */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                /* Full width on small screens */
-                padding: 10px;
-            }
-
-            .baggage-note {
-                flex-direction: column;
-                align-items: start;
-            }
-
-            .header {
-                flex-direction: column;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            .section h3 {
-                font-size: 1.2em;
-            }
-
-            .traveler-info th,
-            .traveler-info td,
-            .billing-details th,
-            .billing-details td {
-                padding: 8px;
-                font-size: 0.9em;
-            }
-
-            .note {
-                font-size: 0.8em;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-
-            .traveler-info {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-
-        @media (max-width: 580px) {
-            .content {
-                padding: 0;
-            }
-
-            .flight-details {
-                padding: 0;
-            }
-
-            .travel-details {
-                padding: 0;
-            }
-
-            .steps {
-                padding: 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 1.2em;
-            }
-
-            .section h3 {
-                font-size: 1em;
-            }
-
-            .traveler-info th,
-            .traveler-info td,
-            .billing-details th,
-            .billing-details td {
-                padding: 6px;
-                font-size: 0.8em;
-            }
-
-            .header .actions {
-                align-items: flex-start;
-                /* Align to the start */
-            }
-
-            .header .actions button {
-                width: 100%;
-                /* Full width for buttons on mobile */
-                margin: 5px 0;
-                /* Space between buttons */
-            }
-
-            .steps {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .step {
-                width: 90%;
-            }
-        }
-  </style>
-</head>
-
-<body>
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  /* Limit width on larger screens */
+  margin: 20px auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.header {
+  background-color: #f0f5ff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header img {
+  height: 40px;
+}
+.header .help {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px; /* Space between help text and buttons
+*/
+}
+.header .actions {
+  display: flex;
+  gap: 10px;
+  float: right; /* Space
+between buttons */
+}
+.header .actions button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.content {
+  padding: 20px;
+}
+.content h2 {
+  font-size: 18px;
+  color: #e56232;
+  margin-bottom: 10px;
+}
+.details {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.details .info {
+  font-size: 14px;
+  color: #555;
+  flex: 1; /* Allow flex-grow */
+  min-width: 240px; /* Prevent
+it from getting too narrow */
+}
+.details .qr-code {
+  text-align: center;
+}
+.details .qr-code img {
+  height: 80px;
+}
+.note {
+  background: #f1f9ff;
+  border-left: 4px solid #007bff;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+.terms {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+.steps {
+  display: flex;
+  flex-direction: row; /*
+flex-wrap: wrap; Allow wrapping */
+  justify-content: space-between;
+  background: #f9f9f9;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+}
+.step {
+  text-align: center;
+  flex: 1 1 23%; /* Flex-grow, flex-shrink, and basis */
+  margin: 5px; /* Space between steps */
+  font-size: 14px;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.step1 {
+  background: linear-gradient(to left, #ffffff, #dcecfb);
+}
+.step2 {
+  background: linear-gradient(to right, #c5bfae, #ffffff);
+}
+.step3 {
+  background: linear-gradient(to right, #c5bfae, #ffffff);
+}
+.step4 {
+  background: linear-gradient(to right, #c5bfae, #ffffff);
+}
+.step img {
+  height: 40px;
+  margin-bottom: 10px;
+}
+.step h4 {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+.step p {
+  font-size: 12px;
+  color: #777;
+} /* Flight Details Section */
+.flight-details {
+  font-family: Arial, sans-serif;
+  margin-top: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.flight-details h2 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.flight-section h3 {
+  color: #ff6600;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.flight-info {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+.flight-header {
+  display: flex;
+  flex-direction: column; /* Stack airline info vertically */
+  margin-bottom: 20px;
+}
+.airline-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+}
+.airline-info img {
+  margin-right: 10px;
+  height: 60px;
+}
+.airline-info h4 {
+  margin: 0;
+  color: #333;
+}
+.airline-info p {
+  font-size: 12px;
+  color: #666;
+}
+.travel-class {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.travel-class p {
+  margin: 0;
+  font-size: 14px;
+}
+.flight-details-body {
+  background-color: #eaf0f0;
+  padding: 20px;
+  border-radius: 8px;
+}
+.flight-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.flight-path {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.flight-time {
+  text-align: left;
+}
+.flight-time .date,
+.flight-time .time {
+  font-size: 14px;
+  color: #555;
+}
+.flight-time .time {
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #333;
+  border-radius: 50%;
+}
+.duration {
+  font-size: 14px;
+  color: #555;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.duration img {
+  height: 40px;
+}
+.baggage-note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.baggage-note p {
+  font-size: 12px;
+  color: #666;
+}
+.baggage-info span {
+  font-size: 14px;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+}
+.layover {
+  background-color: #eaf0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* Add padding for spacing */
+  margin-bottom: 20px; /* Space below
+layover */
+}
+.layover img {
+  height: 30px;
+  margin-right: 10px; /* Space
+between image and text */
+}
+.layover p {
+  font-size: 14px;
+  color: #555;
+}
+.travel-details {
+  padding: 20px;
+}
+.section {
+  margin-bottom: 20px;
+}
+.section h3 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-size: 16px; /* Increase the section heading size
+*/
+}
+.traveler-info,
+.billing-details,
+.please-note {
+  width: 100%;
+  border-collapse: collapse;
+}
+.traveler-info th,
+.traveler-info td,
+.billing-details th,
+.billing-details td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.traveler-info td {
+  text-align: center;
+}
+.traveler-info th {
+  background-color: #f9f9f9;
+}
+.status-pending {
+  color: red;
+}
+.status-confirm {
+  color: green;
+}
+.total {
+  font-weight: bold;
+  color: #007bff;
+}
+.note {
+  font-size: 0.9em;
+  color: #555;
+}
+.note a {
+  color: #007bff;
+  text-decoration: none;
+}
+.note a:hover {
+  text-decoration: underline;
+} /* Responsive styles */
+@media (max-width: 1024px) {
+  .details {
+    flex-direction: row; /* Stack details on larger tablets */
+    align-items: flex-start;
+  }
+  .details .qr-code {
+    margin-top: 10px; /* Add margin for
+spacing when stacked */
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    width: 95%; /* Full width on small screens */
+    padding: 10px;
+  }
+  .baggage-note {
+    flex-direction: column;
+    align-items: start;
+  }
+  .header {
+    flex-direction: column;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  .section h3 {
+    font-size: 1.2em;
+  }
+  .traveler-info th,
+  .traveler-info td,
+  .billing-details th,
+  .billing-details td {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+  .note {
+    font-size: 0.8em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .traveler-info {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 580px) {
+  .content {
+    padding: 0;
+  }
+  .flight-details {
+    padding: 0;
+  }
+  .travel-details {
+    padding: 0;
+  }
+  .steps {
+    padding: 0;
+  }
+}
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.2em;
+  }
+  .section h3 {
+    font-size: 1em;
+  }
+  .traveler-info th,
+  .traveler-info td,
+  .billing-details th,
+  .billing-details td {
+    padding: 6px;
+    font-size: 0.8em;
+  }
+  .header .actions {
+    align-items: flex-start; /* Align to the start */
+  }
+  .header .actions button {
+    width: 100%; /* Full width for buttons on mobile */
+    margin: 5px 0; /* Space between buttons */
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .step {
+    width: 90%;
+  }
+}
+
+   </style>
+  </head>
+
+  <body>
     <div class="container">
-        <div class="header">
-            <p class="help">
-                For any changes with your flight, date, route, or names<br />
-                Call us at <strong>1-646-736-4922</strong> or
-                <a href="#">Click here to reach help center</a>
+      <div
+        class="header"
+        style=" display: flex; justify-content: space-between; align-items: center;"
+      >
+        <p class="help">
+          For any changes with your flight, date, route, or names<br />
+          Call us at
+          <strong>1-646-736-4922</strong>
+          or
+          <a href="#">Click here to reach help center</a>
+        </p>
+        <div class="actions">
+          <button>Print Ticket</button>
+          <button>Download Ticket</button>
+          <button>Share Ticket</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2 class="booking_header">Booking Acknowledgement</h2>
+        <div class="details">
+          <div class="info">
+            <p><strong>Qatar Booking:</strong> {{id}}</p>
+            <p><strong>Email:</strong> {{contactDetail.email}}</p>
+            <p><strong>Booking on:</strong> {{createdAt}}</p>
+          </div>
+          <div class="qr-code">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1UA-RNBzfbFgVg3sWZWoZoJwkEAc6jy5OtA&s"
+              alt="QR Code"
+            />
+            <p>{{subBooking.0.pnr}}</p>
+          </div>
+        </div>
+        <div class="note">
+          Please check your terminal and gate information with the airline
+          directly at least 24 hours before departure.
+        </div>
+        <div class="terms">Terms and Confirmation</div>
+        <div class="steps">
+          <div class="step step1">
+            <img
+              src="https://cdn-icons-png.freepik.com/256/16200/16200876.png?semt=ais_hybrid"
+              alt="90 minutes"
+            />
+            <h4>Check in online, or</h4>
+            <p>
+              Check in at the airport. At most airports, you need to arrive 3
+              hours before departure.
             </p>
-            <div class="actions">
-                <button>Print Ticket</button>
-                <button>Download Ticket</button>
-                <button>Share Ticket</button>
-            </div>
+          </div>
+          <div class="step step2">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/456/456432.png"
+              alt="90 minutes"
+            />
+            <h4>90 minutes</h4>
+            <p>90 minutes before take-off go through passport control.</p>
+          </div>
+          <div class="step step3">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/657/657674.png"
+              alt="60 minutes"
+            />
+            <h4>60 minutes</h4>
+            <p>
+              60 minutes before take-off be ready at the gate (Premium Economy,
+              Economy Class).
+            </p>
+          </div>
+          <div class="step step4">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/799/799627.png"
+              alt="45 minutes"
+            />
+            <h4>45 minutes</h4>
+            <p>
+              45 minutes before take-off be ready at the gate (First Class,
+              Business Class).
+            </p>
+          </div>
         </div>
+      </div>
 
-        <div class="content">
-            <h2 class="booking_header">Booking Acknowledgement</h2>
-            <div class="details">
-                <div class="info">
-                    <p><strong>Qatar Booking:</strong> 85533720</p>
-                    <p><strong>Email:</strong> Demo@gmail.com</p>
-                    <p><strong>Booking on:</strong> Tue, June 11, 2024</p>
+      <div class="flight-details">
+        <h2>Flight Details</h2>
+        <div class="flight-section">
+          <h3>Departing Flight</h3>
+          <p class="note">
+            Note: The following flight has different class of service
+          </p>
+          <div class="flight-info">
+            <div class="flight-header">
+              <div class="airline-info">
+                <img
+                  src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                  alt="Airline Logo"
+                />
+                <div>
+                  <h4>ABC Airline</h4>
+                  <p>
+                    Flight 135 &nbsp; | &nbsp; Aircraft: 135 &nbsp; | &nbsp;
+                    Boeing 735 115-138 STD SEAT
+                  </p>
                 </div>
-                <div class="qr-code">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1UA-RNBzfbFgVg3sWZWoZoJwkEAc6jy5OtA&s"
-                        alt="QR Code" />
-                    <p>A1GEZX</p>
-                </div>
+              </div>
+              <div class="travel-class">
+                <p>Travel Class: <strong>Economy</strong></p>
+                <p>Airlines Confirmation [PNR]: <strong>A1GEZX</strong></p>
+              </div>
             </div>
-            <div class="note">
-                Please check your terminal and gate information with the airline
-                directly at least 24 hours before departure.
+            <div class="flight-details-body">
+              <div class="flight-entry">
+                <div class="flight-time">
+                  <p class="date">Sun, 29 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>Moi Intl, Mombasa Kenya</p>
+                </div>
+                <div class="flight-path">
+                  <span class="dot"></span>
+                  <span class="duration">
+                    <img
+                      src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                      alt="Qatar Logo"
+                    />
+                    9hr 50min
+                  </span>
+                  <span class="dot"></span>
+                </div>
+                <div class="flight-time">
+                  <p class="date">Sun, 30 Jan 2023</p>
+                  <p class="time">02.50</p>
+                  <p>JFK Terminal, Nairobi, Kenya</p>
+                </div>
+              </div>
+              <div class="flight-entry">
+                <div class="flight-time">
+                  <p class="date">Sun, 30 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>JFK Terminal, Nairobi, Kenya</p>
+                </div>
+                <div class="flight-path">
+                  <span class="dot"></span>
+                  <span class="duration">
+                    <img
+                      src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                      alt="Qatar Logo"
+                    />
+                    9hr 50min
+                  </span>
+                  <span class="dot"></span>
+                </div>
+                <div class="flight-time">
+                  <p class="date">Sun, 29 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>Moi Intl, Mombasa Kenya</p>
+                </div>
+              </div>
             </div>
-            <div class="terms">Terms and Confirmation</div>
-            <div class="steps">
-                <div class="step step1">
-                    <img src="https://cdn-icons-png.freepik.com/256/16200/16200876.png?semt=ais_hybrid"
-                        alt="90 minutes" />
-                    <h4>Check in online, or</h4>
-                    <p>
-                        Check in at the airport. At most airports, you need to arrive 3
-                        hours before departure.
-                    </p>
-                </div>
-                <div class="step step2">
-                    <img src="https://cdn-icons-png.flaticon.com/512/456/456432.png" alt="90 minutes" />
-                    <h4>90 minutes</h4>
-                    <p>90 minutes before take-off go through passport control.</p>
-                </div>
-                <div class="step step3">
-                    <img src="https://cdn-icons-png.flaticon.com/512/657/657674.png" alt="60 minutes" />
-                    <h4>60 minutes</h4>
-                    <p>
-                        60 minutes before take-off be ready at the gate (Premium Economy,
-                        Economy Class).
-                    </p>
-                </div>
-                <div class="step step4">
-                    <img src="https://cdn-icons-png.flaticon.com/512/799/799627.png" alt="45 minutes" />
-                    <h4>45 minutes</h4>
-                    <p>
-                        45 minutes before take-off be ready at the gate (First Class,
-                        Business Class).
-                    </p>
-                </div>
+            <div class="baggage-note">
+              <p>
+                Check airlines Fare rules. Most airlines charge baggage fees.
+                Check the baggage Fees for complete details.
+              </p>
+              <div class="baggage-info">
+                <span>🛄 7kg</span>
+                <span>📂 0</span>
+                <span>🔒 1</span>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <div class="flight-details">
-            <h2>Flight Details</h2>
-            <div class="flight-section">
-                <h3>Departing Flight</h3>
-                <p class="note">
-                    Note: The following flight has different class of service
-                </p>
-                <div class="flight-info">
-                    <div class="flight-header">
-                        <div class="airline-info">
-                            <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                alt="Airline Logo" />
-                            <div>
-                                <h4>ABC Airline</h4>
-                                <p>
-                                    Flight 135 &nbsp; | &nbsp; Aircraft: 135 &nbsp; | &nbsp;
-                                    Boeing 735 115-138 STD SEAT
-                                </p>
-                            </div>
-                        </div>
-                        <div class="travel-class">
-                            <p>Travel Class: <strong>Economy</strong></p>
-                            <p>Airlines Confirmation [PNR]: <strong>A1GEZX</strong></p>
-                        </div>
-                    </div>
-                    <div class="flight-details-body">
-                        <div class="flight-entry">
-                            <div class="flight-time">
-                                <p class="date">Sun, 29 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>Moi Intl, Mombasa Kenya</p>
-                            </div>
-                            <div class="flight-path">
-                                <span class="dot"></span>
-                                <span class="duration">
-                                    <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                        alt="Qatar Logo" />
-                                    9hr 50min
-                                </span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="flight-time">
-                                <p class="date">Sun, 30 Jan 2023</p>
-                                <p class="time">02.50</p>
-                                <p>JFK Terminal, Nairobi, Kenya</p>
-                            </div>
-                        </div>
-                        <div class="flight-entry">
-                            <div class="flight-time">
-                                <p class="date">Sun, 30 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>JFK Terminal, Nairobi, Kenya</p>
-                            </div>
-                            <div class="flight-path">
-                                <span class="dot"></span>
-                                <span class="duration">
-                                    <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                        alt="Qatar Logo" />
-                                    9hr 50min
-                                </span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="flight-time">
-                                <p class="date">Sun, 29 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>Moi Intl, Mombasa Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="baggage-note">
-                        <p>
-                            Check airlines Fare rules. Most airlines charge baggage fees.
-                            Check the baggage Fees for complete details.
-                        </p>
-                        <div class="baggage-info">
-                            <span>🛄 7kg</span>
-                            <span>📂 0</span>
-                            <span>🔒 1</span>
-                        </div>
-                    </div>
+      <div class="layover">
+        <img
+          src="https://cdn3.iconfinder.com/data/icons/airport-41/32/Artboard_39-512.png"
+          alt="food"
+        />
+        <p>3h 5m layover</p>
+        <p>Stopover in Mumbai (BOM), you will have to change the FLIGHT</p>
+      </div>
+
+      <div class="flight-details">
+        <div class="flight-section">
+          <h3>Departing Flight</h3>
+          <p class="note">
+            Note: The following flight has different class of service
+          </p>
+          <div class="flight-info">
+            <div class="flight-header">
+              <div class="airline-info">
+                <img
+                  src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                  alt="Airline Logo"
+                />
+                <div>
+                  <h4>ABC Airline</h4>
+                  <p>
+                    Flight 135 &nbsp; | &nbsp; Aircraft: 135 &nbsp; | &nbsp;
+                    Boeing 735 115-138 STD SEAT
+                  </p>
                 </div>
+              </div>
+              <div class="travel-class">
+                <p>Travel Class: <strong>Economy</strong></p>
+                <p>Airlines Confirmation [PNR]: <strong>A1GEZX</strong></p>
+              </div>
             </div>
-        </div>
-
-        <div class="layover">
-            <img src="https://cdn3.iconfinder.com/data/icons/airport-41/32/Artboard_39-512.png" alt="food" />
-            <p>3h 5m layover</p>
-            <p>Stopover in Mumbai (BOM), you will have to change the FLIGHT</p>
-        </div>
-
-        <div class="flight-details">
-            <div class="flight-section">
-                <h3>Departing Flight</h3>
-                <p class="note">
-                    Note: The following flight has different class of service
-                </p>
-                <div class="flight-info">
-                    <div class="flight-header">
-                        <div class="airline-info">
-                            <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                alt="Airline Logo" />
-                            <div>
-                                <h4>ABC Airline</h4>
-                                <p>
-                                    Flight 135 &nbsp; | &nbsp; Aircraft: 135 &nbsp; | &nbsp;
-                                    Boeing 735 115-138 STD SEAT
-                                </p>
-                            </div>
-                        </div>
-                        <div class="travel-class">
-                            <p>Travel Class: <strong>Economy</strong></p>
-                            <p>Airlines Confirmation [PNR]: <strong>A1GEZX</strong></p>
-                        </div>
-                    </div>
-                    <div class="flight-details-body">
-                        <div class="flight-entry">
-                            <div class="flight-time">
-                                <p class="date">Sun, 29 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>Moi Intl, Mombasa Kenya</p>
-                            </div>
-                            <div class="flight-path">
-                                <span class="dot"></span>
-                                <span class="duration">
-                                    <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                        alt="Qatar Logo" />
-                                    9hr 50min
-                                </span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="flight-time">
-                                <p class="date">Sun, 30 Jan 2023</p>
-                                <p class="time">02.50</p>
-                                <p>JFK Terminal, Nairobi, Kenya</p>
-                            </div>
-                        </div>
-                        <div class="flight-entry">
-                            <div class="flight-time">
-                                <p class="date">Sun, 30 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>JFK Terminal, Nairobi, Kenya</p>
-                            </div>
-                            <div class="flight-path">
-                                <span class="dot"></span>
-                                <span class="duration">
-                                    <img src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
-                                        alt="Qatar Logo" />
-                                    9hr 50min
-                                </span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="flight-time">
-                                <p class="date">Sun, 29 Jan 2023</p>
-                                <p class="time">14.50</p>
-                                <p>Moi Intl, Mombasa Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="baggage-note">
-                        <p>
-                            Check airlines Fare rules. Most airlines charge baggage fees.
-                            Check the baggage Fees for complete details.
-                        </p>
-                        <div class="baggage-info">
-                            <span>🛄 7kg</span>
-                            <span>📂 0</span>
-                            <span>🔒 1</span>
-                        </div>
-                    </div>
+            <div class="flight-details-body">
+              <div class="flight-entry">
+                <div class="flight-time">
+                  <p class="date">Sun, 29 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>Moi Intl, Mombasa Kenya</p>
                 </div>
+                <div class="flight-path">
+                  <span class="dot"></span>
+                  <span class="duration">
+                    <img
+                      src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                      alt="Qatar Logo"
+                    />
+                    9hr 50min
+                  </span>
+                  <span class="dot"></span>
+                </div>
+                <div class="flight-time">
+                  <p class="date">Sun, 30 Jan 2023</p>
+                  <p class="time">02.50</p>
+                  <p>JFK Terminal, Nairobi, Kenya</p>
+                </div>
+              </div>
+              <div class="flight-entry">
+                <div class="flight-time">
+                  <p class="date">Sun, 30 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>JFK Terminal, Nairobi, Kenya</p>
+                </div>
+                <div class="flight-path">
+                  <span class="dot"></span>
+                  <span class="duration">
+                    <img
+                      src="https://crystalpng.com/wp-content/uploads/2023/09/Qatar-airways-animal-logo.png"
+                      alt="Qatar Logo"
+                    />
+                    9hr 50min
+                  </span>
+                  <span class="dot"></span>
+                </div>
+                <div class="flight-time">
+                  <p class="date">Sun, 29 Jan 2023</p>
+                  <p class="time">14.50</p>
+                  <p>Moi Intl, Mombasa Kenya</p>
+                </div>
+              </div>
             </div>
+            <div class="baggage-note">
+              <p>
+                Check airlines Fare rules. Most airlines charge baggage fees.
+                Check the baggage Fees for complete details.
+              </p>
+              <div class="baggage-info"> 
+                <span>🛄 7kg</span> 
+                <span>📂 0</span> 
+                <span>🔒 1</span> 
+              </div> 
+            </div> 
+          </div> 
         </div>
+      </div>
 
-        <div class="travel-details">
-            <div class="section">
-                <h2>Traveler Information</h2>
-                <table class="traveler-info">
-                    <tr>
-                        <th>E-Ticket Number</th>
-                        <th>PNR Number</th>
-                        <th>Status</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Request</th>
-                        <th>Gender</th>
-                    </tr>
-                    <tr>
-                        <td>A1GEZX</td>
-                        <td>Pending</td>
-                        <td class="status-pending">Pending</td>
-                        <td>Animesh</td>
-                        <td>Sadh</td>
-                        <td>Sadh</td>
-                        <td>Male</td>
-                    </tr>
-                    <tr>
-                        <td>A25EZX</td>
-                        <td>Confirm</td>
-                        <td class="status-confirm">Confirm</td>
-                        <td>Animesh</td>
-                        <td>Sadh</td>
-                        <td>Sadh</td>
-                        <td>Male</td>
-                    </tr>
-                </table>
-                <p class="note">
-                    Disclaimer: Not all flights offer free meals. Any specific request you may
-                    have will be sent to the airline(s). Please contact your airline(s)
-                    directly, prior to your departure date, to confirm what meal options may
-                    be available and if your other requests can be fulfilled.
-                </p>
-            </div>
-            <div class="section">
-                <h2>Billing Details</h2>
-                <table class="billing-details">
-                    <tr>
-                        <th>Flight Price Details</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>1 Adult Ticket</td>
-                        <td>$281.00</td>
-                    </tr>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>$281.00</td>
-                    </tr>
-                    <tr>
-                        <td class="total">Flight Total</td>
-                        <td class="total">$281.00</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="section">
-                <h2>Please Note</h2>
-                <p class="note">
-                    Fares are not guaranteed until ticketed. Taxes, fees, and baggage charges
-                    are subject to change and may be additional. For more information, please
-                    review our <a href="#">Privacy Policy</a> or <a href="#">Contact Us</a>.
-                </p>
-            </div>
+      <div class="travel-details">
+        <div class="section">
+          <h2>Traveler Information</h2>
+          <table class="traveler-info">
+            <tr>
+              <th>E-Ticket Number</th>
+              <th>PNR Number</th>
+              <th>Status</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Request</th>
+              <th>Gender</th>
+            </tr>
+            <tr>
+              <td>A1GEZX</td>
+              <td>Pending</td>
+              <td class="status-pending">Pending</td>
+              <td>Animesh</td>
+              <td>Sadh</td>
+              <td>Sadh</td>
+              <td>Male</td>
+            </tr>
+            <tr>
+              <td>A25EZX</td>
+              <td>Confirm</td>
+              <td class="status-confirm">Confirm</td>
+              <td>Animesh</td>
+              <td>Sadh</td>
+              <td>Sadh</td>
+              <td>Male</td>
+            </tr>
+          </table>
+          <p class="note">
+            Disclaimer: Not all flights offer free meals. Any specific request
+            you may have will be sent to the airline(s). Please contact your
+            airline(s) directly, prior to your departure date, to confirm what
+            meal options may be available and if your other requests can be
+            fulfilled.
+          </p>
         </div>
+        <div class="section">
+          <h2>Billing Details</h2>
+          <table class="billing-details">
+            <tr>
+              <th>Flight Price Details</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>1 Adult Ticket</td>
+              <td>$281.00</td>
+            </tr>
+            <tr>
+              <td>Subtotal</td>
+              <td>$281.00</td>
+            </tr>
+            <tr>
+              <td class="total">Flight Total</td>
+              <td class="total">$281.00</td>
+            </tr>
+          </table>
+        </div>
+        <div class="section">
+          <h2>Please Note</h2>
+          <p class="note">
+            Fares are not guaranteed until ticketed. Taxes, fees, and baggage
+            charges are subject to change and may be additional. For more
+            information, please review our
+            <a href="#">Privacy Policy</a>
+            or
+            <a href="#">Contact Us</a>.
+          </p>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 
 </html>

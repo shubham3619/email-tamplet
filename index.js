@@ -2,12 +2,15 @@ import nodemailer from 'nodemailer';
 import hbs from 'nodemailer-express-handlebars';
 import path from 'path';
 import dotenv from 'dotenv';
-
+import { format } from 'date-fns';
 
 
 // Load environment variables
 dotenv.config();
 
+
+
+  
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -24,6 +27,24 @@ const handlebarOptions = {
     partialsDir: path.resolve('./views/'),
     layoutsDir: path.resolve('./views/'),
     defaultLayout: '',
+    helpers: {
+        formatDate: (datetime) => {
+          const date = new Date(datetime);
+          return format(date, 'EEE, dd MMM yyyy'); // Example: Sun, 29 Jan 2023
+        },
+        formatTime: (datetime) => {
+          const date = new Date(datetime);
+          return format(date, 'HH.mm'); // Example: 14.50
+        },
+        helpers: {
+            formatDate: (isoDate) => {
+              // Parse and format the date
+              const date = new Date(isoDate);
+              return format(date, 'EEE, MMMM dd, yyyy'); // Example: "Tue, June 11, 2024"
+            },
+          },
+        eq: (a, b) => a === b,
+      },
   },
   viewPath: path.resolve('./views/'),
   extName: '.hbs',
@@ -37,7 +58,7 @@ const mailOptions = {
   from: process.env.EMAIL,
   to: 'dummymail2342@gmail.com',
   subject: 'Your Flight Ticket Confirmation',
-  template: 'new-tamplet', // Name of the .hbs file in the `views` folder
+  template: 'other-tamplet', // Name of the .hbs file in the `views` folder
   context: {
     "id": "5be6c9a1-f6ce-427d-b358-17eb0607b9a3",
     "contactDetail": {
